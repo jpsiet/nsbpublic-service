@@ -1,0 +1,5 @@
+currently data load not working, will do later
+1.  students Api structure differ than what we are saving in data base
+ DTO  ( data trasnfer object , whats comes as part of request) vs entity ( what we save in data base)
+
+ for now just as time of save student we have different strcuture other it will be same all the time
