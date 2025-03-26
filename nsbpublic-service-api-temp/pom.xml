@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+
+
+<parent>
+		<groupId>com.school</groupId>
+		<artifactId>nsbpublic-service</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>nsbpublic-service-api</artifactId>
+	<properties>
+		<java.version>17</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	<dependencies>
+		<!-- config depe -->
+		<dependency>
+			<groupId>com.school</groupId>
+			<artifactId>nsbpublic-service-config</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Spring Boot Starter Data JPA for ORM -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- Spring Boot Starter Validation (includes Hibernate Validator) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!-- Oracle JDBC Driver -->
+		<dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc10</artifactId>
+			<version>19.8.0.0</version> <!-- Make sure to use the correct version -->
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.6.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- Spring Boot DevTools for easier development -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.36</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Add javax.annotation-api to support @Generated annotation -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.18.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.18.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.openapitools/jackson-databind-nullable -->
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+			<!-- Servlet API Dependency (for older servlet code) -->
+			<dependency>
+				<groupId>jakarta.servlet</groupId>
+				<artifactId>jakarta.servlet-api</artifactId>
+
+			</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.21</version>
+
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-cli -->
+
+		<!-- Maven -->
+
+		<dependency>
+			<groupId>com.intuit.karate</groupId>
+			<artifactId>karate-core</artifactId>
+			<version>1.2.0</version> <!-- Update to the latest version -->
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testOutputDirectory>src/test/java</testOutputDirectory>
+
+		<plugins>
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-compiler-plugin</artifactId>
+
+</plugin>
+
+
+					<plugin>
+						<groupId>org.openapitools</groupId>
+						<artifactId>openapi-generator-maven-plugin</artifactId>
+						<version>7.2.0</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal> <!-- Goal to generate code from OpenAPI spec -->
+								</goals>
+								<configuration>
+									<!-- Path to your OpenAPI specification -->
+									<inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
+									<generatorName>spring</generatorName> <!-- Spring-specific generation -->
+									<!-- Output directory -->
+																		<apiPackage>com.school.api</apiPackage> <!-- Package for generated APIs -->
+
+
+										<generateSupportingFiles>true</generateSupportingFiles> <!-- Ensure supporting files are generated (e.g., API interfaces) -->
+									<configOptions>
+										<generateModels>true</generateModels>
+										<modelPackage>com.school.model</modelPackage>  <!-- Package for models -->
+  <useTags>true</useTags>
+										<basePackage>com.school</basePackage>
+										<openApiNullable>false</openApiNullable>
+<implicitHeader>true</implicitHeader>
+										<useJakartaEe>tre</useJakartaEe>
+										<useSpringBoot3>true</useSpringBoot3>
+										<interfaceOnly>true</interfaceOnly> <!-- Ensure only interfaces are generated, without controllers -->
+									<generateConstructrorWithReqiredArgs>false</generateConstructrorWithReqiredArgs>
+								<additionalModelTypeAnnotations> @lombok.Builder
+									@lombok.NoArgsConstructor
+									@lombok.AllArgsConstructor
+								</additionalModelTypeAnnotations>
+									</configOptions>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<configuration>
+		<excludes>
+			<exclude>target/generated-sources/openapi/src/main/java</exclude>
+		</excludes>
+	</configuration>
+</plugin>
+		</plugins>
+		<testResources>
+			<testResource>
+				<directory>src/test/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>karate-repo</id>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+	</repositories>
+
+
+</project>
