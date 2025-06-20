@@ -1,0 +1,1 @@
+how schema and user different.. as shcema meands create data base

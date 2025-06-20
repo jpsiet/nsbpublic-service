@@ -1,0 +1,130 @@
+
+in case want to uninstall  orcale  go registeryand search oracleserviceXE and delete 
+all occruenece search multiple times
+mltitenant container database localhost:1521
+plugggable database  localhost:1521/XEPDB1
+Express URL: https://localhost:5500/em
+ 
+
+1. oracel 19c data base
+2. sql developer for gui to write and execute query
+orcl install step 
+windows user
+oracle
+system
+global data base name
+oracle
+password Hello1234
+
+
+
+Oracle Enterprise Manager Database Express URL: https://localhost:5500/em
+
+https://www.youtube.com/watch?v=GUpvXMHqe2U&t=834s
+https://www.youtube.com/watch?v=hlGoQC332VM === Learn sql
+
+Basics
+Once oracel 19c install verify by opening sqlplus
+search  sqlplus/sqlsheell
+username sys as sysdba
+password as Username one
+
+SID ( site identifier)  choose same as XE or create ocrl any thing is good
+
+for sql developer
+
+create connection
+
+give db name
+testdb
+username sys
+password same as  global data base one system
+change role sysdba (in role dropdown)
+in sid change oracl  ( as we have changed databse to oracle to orcl)
+
+select sysdate from dual; // just to show today date
+select * from all_users;  /// select from all tables by 
+
+
+
+Create  table/schema for testing 
+CREATE table  college ( id int,  name varchar(50) null,age INT NOT NULL,PRIMARY KEY(id,name));
+
+primary key can be combination of two column
+Column can be default  value
+CREATE table  college ( id int,  name varchar(50) null,age INT  default 21,PRIMARY KEY(id));
+INSERT INTO college(id,name)  values(2,'jitendra');
+
+
+
+
+Creating new user for app ( pluggable data base)
+
+we need to set session container for plugable database
+
+alter session set container=orclpdb;
+DROP USER nsbpublic CASCADE;   // in case already created 
+CREATE USER nsbpublic IDENTIFIED BY nsbpublic;
+GRANT CONNECT to nsbpublic;
+GRANT CREATE SESSION, GRANT any PRIVILEGE to nsbpublic;
+GRANT UNLIMITED TABLESPACE TO nsbpublic;
+GRANT CREATE TABLE to nsbpublic;
+grant all privileges to nsbpublic;
+
+
+check if user created or not 
+select * from all_uesers;  should display nsbpblic 
+
+Once this user created without any issue
+create new connection
+
+give user name and password and  instead  of going with sid go with service
+give value orclpdb for oracle 19c
+
+we can check plugable data base name 
+select name, pdb from v$services order by pdb, name;
+show con_name;
+select name,open_mode  from v$pdbs;
+
+Once connection successs , connect with backend
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521/orclpdb   # with service name
+like here in case username nsbpublic password nsbpublic
+in case with id ( but here will not work with ID)
+#spring.datasource.url=jdbc:oracle:thin:@localhost:1521:orcl # with SID 
+
+pluugable data base name  orclpdb
+
+Now time to connect to create shcema/user in order to work/test with project
+
+Issue
+spring.jpa.hibernate.ddl-auto=update
+
+ DROP TABLE ecommerceapp.product_category1
+ CASCADE CONSTRAINTS 
+  PURGE ;
+
+
+
+# in html format   // display data in specific format and export 
+spool C:\jitendra\document\mydata.html
+select /*html*/* from all_users; 
+select * from all_tables where owner='SYS';
+
+
+How to change data format
+
+go  to tool =>preference == databse ==> NLS
+
+then change form DD-MMM ( means month name like 01 jan) so if you want to ( 01-01) then do DD-MM
+
+
+
+
+ORA-01109: database not open
+
+Login with sys user.
+alter the session to the pluggable database with the following command.
+SQL>alter session set container=orclpdb;
+Next startup the database.
+sql> startup
+SQL>startup After that database will not show the above error.

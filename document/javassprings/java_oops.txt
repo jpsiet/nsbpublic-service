@@ -1,0 +1,37 @@
+Interfeace vs abstract 
+in interfacr  all dervied class  have to implement interface method same as
+  for abstract class
+abstract class can also have properties/field too but not with interface... 
+  in interface  field properties will be static/constant  you can not  
+use them and does't make sense
+abstract class can also have non abtract means with implemenation
+ ( by default dervied class can use)
+We can have instance and static initialization blocks in an abstract class,
+ whereas we can never have them in the interface
+
+
+Java 8 new features support static and default methods in interfaces to 
+support backward compatibility. Methods in an interface are implicitly 
+abstract if they are not static or default and all are public.
+
+However, starting with Java 9, we can also add private methods in interfaces.
+
+interfaces. == If the problem needs to be solved using multiple inheritances and is 
+composed of different class hierarchies
+
+
+
+Why Do We Need Java Inheritance?
+Code Reusability: The code written in the Superclass is common to all subclasses.
+ Child classes can directly use the parent class code.
+Method Overriding: Method Overriding is achievable only through Inheritance. 
+It is one of the ways by which Java achieves Run Time Polymorphism.
+Abstraction: The concept of abstract where we do not have to provide all 
+details is achieved through inheritance. Abstraction only shows the functionality to the user.
+
+
+Super Class/Parent Class: The class whose features are inherited is known as a
+ superclass(or a base class or a parent class).
+Sub Class/Child Class: The class that inherits the other class is known as a
+ subclass(or a derived class, extended class, or child class). The subclass can add its own
+ fields and methods in addition to the superclass fields and methods.

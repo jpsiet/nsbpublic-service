@@ -1,0 +1,150 @@
+/pom.xml Modified
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+</dependency> 
+
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=social-media-user --env MYSQL_PASSWORD=dummypassword --env MYSQL_DATABASE=social-media-database --name mysql --publish 3306:3306 mysql:8-oracle
+mysqlsh commands
+mysqlsh
+\connect social-media-user@localhost:3306
+\sql
+use social-media-database
+select * from user_details;
+select * from post;
+\quit
+/src/main/resources/application.properties Modified
+#spring.datasource.url=jdbc:h2:mem:testdb
+spring.jpa.show-sql=true
+spring.datasource.url=jdbc:mysql://localhost:3306/social-media-database
+spring.datasource.username=social-media-user
+spring.datasource.password=dummypassword
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+
+
+// use data base
+USE sql_store;
+select * FROM customers
+where customer_id=1
+ORDER BY first_name
+
+// comment in sql query just put two hyphen
+like 
+select * FROM customers
+-- where customer_id=1  comment line with --
+ORDER BY first_name
+
+// create new column just for display and also alias like below
+// here we displaying one more column as calcualted from existing points column and displaying as different column name( alias)
+select  last_name, first_name,points,
+(poinst+10)*100 As discount_factoe FROM customers
+
+between operator
+select * from customers where points between 1000 and 5000; -- both range included
+select * from customers where birth_date between '1968-03-28' and 
+'2020-01-30'; -- both range included and date format YYYY-MM-DD
+
+
+In operator use to check if that value present
+like
+
+select * FROM customers
+where state in ('VA','FL','GA');
+
+NOT In is just opposite
+
+
+find of regex.. like starts with b
+select * from customers  WHERE  first_name  LIKE 'b%';
+
+
+
+ORACLE
+
+oracle.imp
+
+1. oracel 19c data base
+2. sql developer for gui to write and execute query
+
+global data base name
+orcl
+password Hello123
+pluugable data base name  orclpdb
+https://www.youtube.com/watch?v=GUpvXMHqe2U&t=834s
+https://www.youtube.com/watch?v=hlGoQC332VM === Learn sql
+
+Oracle Enterprise Manager Database Express URL: https://localhost.docker.internal:5500/em
+
+search  sqlplus
+username sys as sysdba
+
+Hello123
+select * from tab for test
+
+Create connection
+
+testdb   user   sys  pass Hello123
+sid orcl
+role sysdba
+Create Query 
+CREATE table  college ( id int,  name varchar(50) null,age INT NOT NULL,PRIMARY KEY(id,name));
+
+primary key can be combination of two column
+Column can be default  value
+CREATE table  college ( id int,  name varchar(50) null,age INT  default 21,PRIMARY KEY(id));
+INSERT INTO college(id,name)  values(2,'jitendra');
+
+good query 
+INSERT INTO college  values(2,'manviya',35);
+
+constraints
+
+check
+CREATE table  college ( id int,  name varchar(50) null,age INT  default 21,PRIMARY KEY(id),CONSTRAINT age_check CHECK (age>=18));
+
+age_check is optional just to explain for others
+it can be like this too
+CREATE table  college ( id int,  name varchar(50) null,age INT  default 21,PRIMARY KEY(id), CHECK (age>=18));
+
+you can combine with multiple column
+CREATE table  college ( id int,  name varchar(50) null,age INT  default 21 ,city VARCHAR(50) ,PRIMARY KEY(id), CHECK (age>=18 AND city='Delhi'));
+
+
+INSERT INTO college(id,name,city)  values(2,'jitendra','Delhi');
+INSERT INTO college(id,name,city)  values(3,'jitendra','Delhii');
+
+second query will not work as city name not delhi extra i;
+
+
+Column wise 
+select id,name, city  from college;
+select DISTINCT name  from college;  to get unique
+
+
+clause
+
+select id from college where id>20;
+
+Issue
+spring.jpa.hibernate.ddl-auto=update
+
+
+CREATE table customers   ( customer_id int,  name varchar(50) null,email varchar(255),PRIMARY KEY(id))
+select * from school where ranking>4;
+select * from school where ranking between 4 AND 6;
+select * from school where state  in('MA','PA');
+select * from school where state not  in('MA','PA');
+select *from school 
+  ORDER BY id DESC
+FETCH FIRST 3 ROWS ONLY;
+
+
+JOIN LOGIC
+student_data  3 student roll 1,2,3
+student_coursedata total 3 course
+student_marks_data;
+
+
+

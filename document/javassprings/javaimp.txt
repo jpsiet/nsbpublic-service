@@ -1,0 +1,19 @@
+all upper case ctr+shift+x, lower  ctr+shift+y
+ctr+space == auto hint
+Ctr+alt+H == call heirarchy
+ctr+shift+r == find file
+ctr+f11 == run program
+ctrl+shift+L === to see all short cut
+
+
+INSERT INTO stock (cusip, name, sector, price, market_cap, description) VALUES
+    ('AAPL', 'Apple Inc.', 'Technology', 150.25,145678,'abc'),
+
+
+
+INSERT INTO stock (cusip, name, sector, price) VALUES
+    ('AAPL', 'Apple Inc.', 'Technology', 150.25),
+    ('GOOG', 'Google LLC', 'Technology', 2800.50),
+    ('AMZN', 'Amazon.com Inc.', 'E-commerce', 3400.10),
+    ('TSLA', 'Tesla Inc.', 'Automotive', 800.50);
+

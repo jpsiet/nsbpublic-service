@@ -1,0 +1,76 @@
+
+
+
+logging arg 
+logging.level.org.springframework.web=debug
+
+order of level  trace debug info warning error off
+Set active profile from run config
+Application properties
+spring.profiles.active=dev
+Program arugment
+--spring.profiles.active=prod
+
+VM Argument
+-Dspring.profiles.active=prod
+
+
+From command line
+java -jar in28minute-rest-web-services-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+
+#expose all end points for actuator
+management.endpoints.web.exposure.include=*
+specficic
+management.endpoints.web.exposure.include=beans, loggers
+
+In addition to including certain endpoints with a property, we can also exclude endpoints. Let’s expose all the endpoints except /threaddump:
+
+management.endpoints.web.exposure.include=*
+management.endpoints.web.exposure.exclude=threaddump
+
+
+
+ data.sql scripts get executed before the Hibernate is initialized.
+We need Hibernate to create our tables before inserting the data into them
+#spring.jpa.defer-datasource-initialization=true
+Please note that for any script-based initialization, i.e.
+inserting data via data.sql or creating schema via schema.sql
+For embedded databases such as H2, this is set to always by default.
+#spring.sql.init.mode=always
+
+Also, as explained in the previous section, script-based initialization is performed by default only for embedded databases. To always initialize a database using scripts, we’ll have to use:
+
+spring.sql.init.mode=always
+
+
+
+in two in build rest API
+
+startwarpai 
+reqres.in
+
+
+mock  openapi
+
+with  stop ligh prism
+prism mock ./opeanapi.yaml -p 80802
+
+while using lombook for now seems like we have to give all annotation like @getter @noarg @allar..
+
+
+
+– @Entity annotation indicates that the class is a persistent Java class.
+– @Table annotation provides the table that maps this entity.
+– @Id annotation is for the primary key.
+– @GeneratedValue annotation is used to define generation strategy for the primary key. GenerationType.AUTO means Auto Increment field.
+– @Column annotation is used to define the column in database that maps annotated field.
+
+
+spring.datasource.url: jdbc:h2:mem:[database-name] for In-memory database and jdbc:h2:file:[path/database-name] for disk-based database.
+spring.datasource.username & spring.datasource.password properties are the same as your database installation.
+Spring Boot uses Hibernate for JPA implementation, we configure H2Dialect for H2 Database
+spring.jpa.hibernate.ddl-auto is used for database initialization. We set the value to update value so that a table will be created in the database automatically corresponding to defined data model. Any change to the model will also trigger an update to the table. For production, this property should be validate.
+spring.h2.console.enabled=true tells the Spring to start H2 Database administration tool and you can access this tool on the browser: http://localhost:8080/h2-console.
+spring.h2.console.path=/h2-ui is for H2 console’s url, so the default url http://localhost:8080/h2-console will change to http://localhost:8080/h2-ui.
+Define Data Model
+Our Data model is Tutorial with four fields: id, title, description, 
