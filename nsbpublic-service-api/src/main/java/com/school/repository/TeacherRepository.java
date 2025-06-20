@@ -1,11 +1,11 @@
 package com.school.repository;
 
+import com.school.entity.TeacherEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.school.entity.Teacher;
 
-public interface TeacherRepository extends JpaRepository<Teacher, Long> {
+public interface TeacherRepository extends JpaRepository<TeacherEntity, Long> {
     // Custom queries if needed (e.g., findByEmail)
-    Teacher findByEmail(String email);
+//    Teacherentity findByEmail(String email);
 }
 

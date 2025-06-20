@@ -104,8 +104,14 @@
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
-
 		</dependency>
+
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
@@ -118,6 +124,8 @@
 
 		</dependency>
 
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -126,17 +134,28 @@
 		<!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-cli -->
 
 		<!-- Maven -->
-
+		<!-- Karate Dependencies -->
 		<dependency>
 			<groupId>com.intuit.karate</groupId>
-			<artifactId>karate-core</artifactId>
-			<version>1.2.0</version> <!-- Update to the latest version -->
+			<artifactId>karate-junit5</artifactId>
+			<version>1.4.1</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.intuit.karate/karate-apache -->
+		<dependency>
+			<groupId>com.intuit.karate</groupId>
+			<artifactId>karate-apache</artifactId>
+			<version>0.9.6</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
-		<testOutputDirectory>src/test/java</testOutputDirectory>
+<!--		<testOutputDirectory>src/test/java</testOutputDirectory>-->
 
 		<plugins>
 			<plugin>

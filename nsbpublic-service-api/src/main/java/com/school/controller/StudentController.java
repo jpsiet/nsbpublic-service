@@ -1,8 +1,6 @@
 package com.school.controller;
 
-
-
-import com.school.api.DefaultApi;
+import com.school.api.StudentsApi;
 import com.school.model.Student;
 import com.school.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,48 +9,40 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
 import java.util.List;
-
-
+import java.util.Optional;
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-
-public class StudentController implements DefaultApi {
+public class StudentController implements StudentsApi {
 
     @Autowired
     private StudentService studentService;
 
-
-
-//
-//    @PostMapping
-//    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
-//        Course savedCourse = courseService.saveCourse(course);
-//        return new ResponseEntity<>(savedCourse, HttpStatus.CREATED);
-//    }
+    @Override
+    public ResponseEntity<Long> addStudent(@RequestBody Student student) {
+        Student savedstudent = studentService.saveStudent(student);
+        return new ResponseEntity<>(savedstudent.getId().longValue(),HttpStatus.CREATED);
+    }
 
 
      @Override
     public ResponseEntity<List<Student>> getAllStudents() {
         List<Student> student = studentService.getAllStudents();
+        // Return a ResponseEntity with the list of students and HTTP status OK (200)
+        // This allows for better control over the HTTP response
+        // For example, if no students are found, you could return an empty list with 200 OK
+        if (student.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 No Content
+        }
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
-//        Optional<Course> course = courseService.getCourseById(id);
-//        return course.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-//
-//    @GetMapping("/teacher/{teacherId}")
-//    public ResponseEntity<List<Course>> getCoursesByTeacher(@PathVariable Long teacherId) {
-//        List<Course> courses = courseService.getCoursesByTeacher(teacherId);
-//        return new ResponseEntity<>(courses, HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
-//        courseService.deleteCourse(id);
-//        return ResponseEntity.noContent().build();
-//    }
+    @Override
+    public ResponseEntity<Student> getStudentById(Long id) {
+
+        Optional<Student> student = Optional.ofNullable(studentService.getStudentById(id));
+        return student.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 }

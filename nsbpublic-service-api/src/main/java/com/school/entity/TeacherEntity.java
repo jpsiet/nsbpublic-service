@@ -1,9 +1,6 @@
 package com.school.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +12,9 @@ import lombok.ToString;
 @Setter  // Lombok will generate the setter methods for all fields
 @AllArgsConstructor  // Lombok will generate a constructor with all fields
 @NoArgsConstructor   // Lombok will generate a default no-args constructor
-@ToString            // Lombok will generate a toString() method
-public class Teacher {
+@ToString
+@Table(name = "teacher")// Lombok will generate a toString() method
+public class TeacherEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +22,8 @@ public class Teacher {
     private String name;
     private String subject;
     private String email;
+    private String department;
+    private Long salary;
 
     // Getters and Setters
 }

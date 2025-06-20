@@ -1,11 +1,67 @@
 openapi: 3.0.1
 info:
-  title: Stdent  API
+  title: Student  API
   description: API for managing Students
   version: 1.0.0
 paths:
+  /teachers:
+    get:
+      tags: [Teachers]
+      summary: Get all teachers
+      operationId: getAllTeachers
+      responses:
+        '200':
+          description: List of Teachers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Teacher'
+    post:
+      tags: [Teachers]
+      summary: Add a new teacher
+      operationId: addTeacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+      responses:
+        '201':
+          description: Teacher added
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          description: Invalid teacher input
+  /teachers/{id}:
+    get:
+      tags: [Teachers]
+      summary: Get Teacher by id
+      operationId: getTeacherById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Teacher details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+        '404':
+          description: Teacher not found
   /students:
     get:
+      tags: [Students]
       summary: Get all students
       operationId: getAllStudents
       responses:
@@ -19,7 +75,8 @@ paths:
                   $ref: '#/components/schemas/Student'
     post:
       summary: Add a new student
-      operationId: addstudent
+      tags: [Students]
+      operationId: addStudent
       requestBody:
         required: true
         content:
@@ -28,13 +85,18 @@ paths:
               $ref: '#/components/schemas/Student'
       responses:
         '201':
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
           description: Student added
         '400':
           description: Invalid student input
-
   /students/{id}:
     get:
-      summary: Get Stdent by id
+      tags: [Students]
+      summary: Get Student by id
       operationId: getStudentById
       parameters:
         - name: id
@@ -42,7 +104,8 @@ paths:
           required: true
           description: id  of the Student
           schema:
-            type: number
+            type: integer
+            format : int64
       responses:
         '200':
           description: Student details
@@ -53,9 +116,27 @@ paths:
         '404':
           description: student not found
 
-
 components:
   schemas:
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: "John Doe"
+        department:
+          type: string
+          example: "science"
+        subject:
+          type: string
+          example: "Mathematics"
+        email:
+          type: string
+          example: "john.doe@example.com"
     Student:
       type: object
       properties:
@@ -75,5 +156,6 @@ components:
         email:
           type: string
           example: "any thing about"
+
 
 

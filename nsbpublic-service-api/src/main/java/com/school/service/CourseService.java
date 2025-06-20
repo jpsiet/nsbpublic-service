@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.school.entity.Course;
-import com.school.entity.Teacher;
+
 import com.school.repository.CourseRepository;
 import com.school.repository.TeacherRepository;
 
@@ -35,10 +35,10 @@ public class CourseService {
         return courseRepository.findById(id);
     }
 
-    public List<Course> getCoursesByTeacher(Long teacherId) {
-        Teacher teacher = teacherRepository.findById(teacherId).orElse(null);
-        return courseRepository.findByTeacher(teacher);
-    }
+//    public List<Course> getCoursesByTeacher(Long teacherId) {
+//        Teacher teacher = teacherRepository.findById(teacherId).orElse(null);
+//        return courseRepository.findByTeacher(teacher);
+//    }
 
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);

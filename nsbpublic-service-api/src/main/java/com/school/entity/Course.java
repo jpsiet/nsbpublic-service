@@ -28,7 +28,7 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "Teacher_id")
-    private Teacher teacher;
+    private TeacherEntity teacher;
 
     // Getters and Setters
 }

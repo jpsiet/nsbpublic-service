@@ -1,9 +1,10 @@
 package com.school.service;
 
+import com.school.entity.TeacherEntity;
+import com.school.entity.TeacherEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.school.entity.Teacher;
 import com.school.repository.TeacherRepository;
 
 import java.util.List;
@@ -19,21 +20,21 @@ public class TeacherService {
         this.teacherRepository = teacherRepository;
     }
 
-    public Teacher saveTeacher(Teacher teacher) {
+    public TeacherEntity saveTeacher(TeacherEntity teacher) {
         return teacherRepository.save(teacher);
     }
 
-    public List<Teacher> getAllTeachers() {
+    public List<TeacherEntity> getAllTeachers() {
         return teacherRepository.findAll();
     }
 
-    public Optional<Teacher> getTeacherById(Long id) {
+    public Optional<TeacherEntity> getTeacherById(Long id) {
         return teacherRepository.findById(id);
     }
 
-    public Teacher getTeacherByEmail(String email) {
-        return teacherRepository.findByEmail(email);
-    }
+//    public TeacherEntity getTeacherByEmail(String email) {
+//        return teacherRepository.findByEmail(email);
+//    }
 
     public void deleteTeacher(Long id) {
         teacherRepository.deleteById(id);

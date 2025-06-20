@@ -39,11 +39,11 @@ public class CourseController {
         return course.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/teacher/{teacherId}")
-    public ResponseEntity<List<Course>> getCoursesByTeacher(@PathVariable Long teacherId) {
-        List<Course> courses = courseService.getCoursesByTeacher(teacherId);
-        return new ResponseEntity<>(courses, HttpStatus.OK);
-    }
+//    @GetMapping("/teacher/{teacherId}")
+//    public ResponseEntity<List<Course>> getCoursesByTeacher(@PathVariable Long teacherId) {
+//        List<Course> courses = courseService.getCoursesByTeacher(teacherId);
+//        return new ResponseEntity<>(courses, HttpStatus.OK);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {

@@ -2,45 +2,32 @@ package com.school.dto;
 
 import com.school.entity.StudentEntity;
 import com.school.model.Student;
-import org.hibernate.annotations.Comment;
-import org.springframework.stereotype.Component;
+import com.school.service.StudentServiceDTO;
 
-import java.math.BigDecimal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Component
-public class StudentModelIMMapper  implements StudentMapper {
+public class StudentModelIMMapper   {
 
-    @Override
-    public List<Student> map(List<StudentEntity> studentEnt) {
-        if (studentEnt == null) {
-            return null;
-        }
-
-        List<Student> list = new ArrayList<>(studentEnt.size());
-        for (StudentEntity studentEntity : studentEnt) {
-            list.add(StudentEntitytToStudent(studentEntity));
-        }
-
-        return list;
+    @Autowired
+     private StudentServiceDTO studentServiceDTO;
+    public List<Student> mapStudentEntListToStudent(List<StudentEntity> studentEntlist) {
+        return  studentEntlist.stream()
+                        .map(studentEntity -> this.studentServiceDTO.convertToDto(studentEntity))
+                       .collect(Collectors.toList());
     }
 
-    protected Student StudentEntitytToStudent(StudentEntity studentEnt) {
-        if (studentEnt == null) {
-            return null;
-        }
+    public Student studentEntitytToStudent(StudentEntity studentEnt) {
+         return  this.studentServiceDTO.convertToDto(studentEnt);
+    }
 
-        Student student = new Student();
-
-        student.setId(BigDecimal.valueOf(studentEnt.getId()));
-        student.setName(studentEnt.getName());
-        student.setAge(BigDecimal.valueOf(studentEnt.getAge()));
-        student.setEmail(studentEnt.getEmail());
-        student.setGrade(studentEnt.getGrade());
-
-        return student;
+    public StudentEntity studentToStudentEntity(Student  student) {
+         return  this.studentServiceDTO.convertToEntity(student);
     }
 
 }
