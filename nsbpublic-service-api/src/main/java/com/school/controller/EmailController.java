@@ -6,6 +6,7 @@ import com.school.dto.EmailTaskRequest;
 import com.school.model.Task;
 import com.school.service.JakartaFormattedEmailSender;
 import com.school.service.JakartaSimpleEmailSender;
+import com.school.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,9 @@ public class EmailController {
 
     @PostMapping("/email-formatted")
     public String sendFormattedEmail(@RequestBody EmailTaskRequest request) {
-        formattedEmailSender.sendEmail(request.getTo(), request.getSubject(), request.getTasks());
+
+        String subject = Utils.fallbackIfBlank(request.getSubject(), "Default Subject");
+        formattedEmailSender.sendEmail(request.getTo(),subject, request.getTasks());
         return "Formatted  email sent!";
     }
 
