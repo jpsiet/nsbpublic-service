@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+<h3>Weekly Report</h3>
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Status</th>
+    </tr>
+    <th:block th:each="item : ${tasks}">
+        <tr>
+            <td th:text="${item.name}">Task Name</td>
+            <td th:text="${item.status}">Status</td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
