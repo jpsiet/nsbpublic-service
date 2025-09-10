@@ -10,4 +10,6 @@ public class EmailTaskRequest {
     private String to;
     private String subject;
     private List<Task> tasks;
+    // Optional
+    private List<String> cc;
 }

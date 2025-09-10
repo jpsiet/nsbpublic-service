@@ -22,16 +22,28 @@ public class EmailController {
     private JakartaFormattedEmailSender formattedEmailSender;
 
 
-    @PostMapping("/simple-email")
+    @PostMapping("/email-simple")
     public String sendEmail(@RequestBody EmailRequest emailReq) {
         simpleEmailSender.sendEmail(emailReq);
         return "Email sent successfully";
     }
 
-    @PostMapping("/formatted-email")
-    public String sendTableEmail(@RequestBody EmailTaskRequest request) {
+    @PostMapping("/email-formatted")
+    public String sendFormattedEmail(@RequestBody EmailTaskRequest request) {
         formattedEmailSender.sendEmail(request.getTo(), request.getSubject(), request.getTasks());
         return "Formatted  email sent!";
     }
+
+    @PostMapping("/email-pdf")
+    public String sendPdfEmail(@RequestBody EmailTaskRequest request) {
+        formattedEmailSender.sendEmailWithPdf(
+                request.getTo(),
+                request.getCc(),
+                request.getSubject(),
+                request.getTasks()
+        );
+        return "Task email with PDF sent!";
+    }
+
 
 }
