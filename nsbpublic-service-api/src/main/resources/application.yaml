@@ -1,0 +1,10 @@
+ email:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: jpsiet@gmail.com
+    password: ljhwuvplheuwwymp
+    auth: true
+    starttls:
+      enable: true
+
